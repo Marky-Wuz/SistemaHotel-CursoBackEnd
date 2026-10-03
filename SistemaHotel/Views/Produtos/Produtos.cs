@@ -58,7 +58,7 @@ namespace SistemaHotel.Produtos
             txtDescricao.Enabled = true;
             txtValor.Enabled = true;
             cbFornecedor.Enabled = true;
-            //txtEstoque.Enabled = true;
+            txtEstoque.Enabled = true;
             btnImg.Enabled = true;
             txtNome.Focus();
 
@@ -82,6 +82,7 @@ namespace SistemaHotel.Produtos
             txtDescricao.Text = "";
             txtValor.Text = "";
             txtEstoque.Text = "";
+            cbFornecedor.Text = "";
             LimparFoto();
         }
 
@@ -114,7 +115,7 @@ namespace SistemaHotel.Produtos
             btnNovo.Enabled = false;
             btnEditar.Enabled = false;
             btnExcluir.Enabled = false;
-            
+
         }
 
         private void BtnSalvar_Click(object sender, EventArgs e)
@@ -181,7 +182,7 @@ namespace SistemaHotel.Produtos
             if (resultado == DialogResult.Yes)
             {
                 //CÓDIGO DO BOTÃO PARA EXCLUIR
-  
+
 
                 MessageBox.Show("Registro Excluido com Sucesso!", "Registro Excluido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnNovo.Enabled = true;
@@ -222,6 +223,7 @@ namespace SistemaHotel.Produtos
         private void TxtBuscarNome_TextChanged(object sender, EventArgs e)
         {
             BuscarNome();
+            habilitarCampos();
         }
 
         private void Grid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -233,6 +235,16 @@ namespace SistemaHotel.Produtos
                 Program.idProduto = grid.CurrentRow.Cells[0].Value.ToString();
                 Close();
             }
+        }
+
+        private void txtNome_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

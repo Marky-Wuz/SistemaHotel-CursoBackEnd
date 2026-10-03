@@ -29,264 +29,286 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmProdutos));
-            this.grid = new System.Windows.Forms.DataGridView();
-            this.cbFornecedor = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtValor = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtNome = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtBuscarNome = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtDescricao = new System.Windows.Forms.TextBox();
-            this.txtEstoque = new System.Windows.Forms.TextBox();
-            this.btnImg = new System.Windows.Forms.Button();
-            this.img = new System.Windows.Forms.PictureBox();
-            this.btnExcluir = new System.Windows.Forms.Button();
-            this.btnEditar = new System.Windows.Forms.Button();
-            this.btnSalvar = new System.Windows.Forms.Button();
-            this.btnNovo = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.img)).BeginInit();
-            this.SuspendLayout();
+            grid = new System.Windows.Forms.DataGridView();
+            cbFornecedor = new System.Windows.Forms.ComboBox();
+            label6 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            txtValor = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            txtNome = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            txtBuscarNome = new System.Windows.Forms.TextBox();
+            label1 = new System.Windows.Forms.Label();
+            txtDescricao = new System.Windows.Forms.TextBox();
+            txtEstoque = new System.Windows.Forms.TextBox();
+            btnImg = new System.Windows.Forms.Button();
+            img = new System.Windows.Forms.PictureBox();
+            btnExcluir = new System.Windows.Forms.Button();
+            btnEditar = new System.Windows.Forms.Button();
+            btnSalvar = new System.Windows.Forms.Button();
+            btnNovo = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)img).BeginInit();
+            SuspendLayout();
             // 
             // grid
             // 
-            this.grid.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid.GridColor = System.Drawing.SystemColors.Control;
-            this.grid.Location = new System.Drawing.Point(25, 161);
-            this.grid.Name = "grid";
-            this.grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grid.Size = new System.Drawing.Size(677, 186);
-            this.grid.TabIndex = 80;
-            this.grid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CellClick);
-            this.grid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CellDoubleClick);
+            grid.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grid.GridColor = System.Drawing.SystemColors.Control;
+            grid.Location = new System.Drawing.Point(29, 186);
+            grid.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            grid.Name = "grid";
+            grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            grid.Size = new System.Drawing.Size(790, 215);
+            grid.TabIndex = 80;
+            grid.CellClick += Grid_CellClick;
+            grid.CellContentClick += grid_CellContentClick;
+            grid.CellDoubleClick += Grid_CellDoubleClick;
             // 
             // cbFornecedor
             // 
-            this.cbFornecedor.Enabled = false;
-            this.cbFornecedor.FormattingEnabled = true;
-            this.cbFornecedor.Location = new System.Drawing.Point(289, 112);
-            this.cbFornecedor.Name = "cbFornecedor";
-            this.cbFornecedor.Size = new System.Drawing.Size(102, 21);
-            this.cbFornecedor.TabIndex = 73;
+            cbFornecedor.Enabled = false;
+            cbFornecedor.FormattingEnabled = true;
+            cbFornecedor.Location = new System.Drawing.Point(337, 129);
+            cbFornecedor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cbFornecedor.Name = "cbFornecedor";
+            cbFornecedor.Size = new System.Drawing.Size(118, 23);
+            cbFornecedor.TabIndex = 73;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(219, 115);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 13);
-            this.label6.TabIndex = 79;
-            this.label6.Text = "Fornecedor:";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(255, 133);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(70, 15);
+            label6.TabIndex = 79;
+            label6.Text = "Fornecedor:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 116);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 13);
-            this.label5.TabIndex = 78;
-            this.label5.Text = "Estoque:";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(26, 134);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(52, 15);
+            label5.TabIndex = 78;
+            label5.Text = "Estoque:";
             // 
             // txtValor
             // 
-            this.txtValor.Enabled = false;
-            this.txtValor.Location = new System.Drawing.Point(447, 112);
-            this.txtValor.Name = "txtValor";
-            this.txtValor.Size = new System.Drawing.Size(67, 20);
-            this.txtValor.TabIndex = 71;
+            txtValor.Enabled = false;
+            txtValor.Location = new System.Drawing.Point(522, 129);
+            txtValor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtValor.Name = "txtValor";
+            txtValor.Size = new System.Drawing.Size(78, 23);
+            txtValor.TabIndex = 71;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(407, 115);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 13);
-            this.label4.TabIndex = 77;
-            this.label4.Text = "Valor:";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(475, 133);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(36, 15);
+            label4.TabIndex = 77;
+            label4.Text = "Valor:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(219, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 76;
-            this.label3.Text = "Descrição:";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(255, 89);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(61, 15);
+            label3.TabIndex = 76;
+            label3.Text = "Descrição:";
             // 
             // txtNome
             // 
-            this.txtNome.Enabled = false;
-            this.txtNome.Location = new System.Drawing.Point(77, 74);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(115, 20);
-            this.txtNome.TabIndex = 69;
+            txtNome.Enabled = false;
+            txtNome.Location = new System.Drawing.Point(90, 85);
+            txtNome.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new System.Drawing.Size(134, 23);
+            txtNome.TabIndex = 69;
+            txtNome.TextChanged += txtNome_TextChanged;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 75;
-            this.label2.Text = "Nome:";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(26, 90);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(43, 15);
+            label2.TabIndex = 75;
+            label2.Text = "Nome:";
             // 
             // txtBuscarNome
             // 
-            this.txtBuscarNome.Location = new System.Drawing.Point(399, 12);
-            this.txtBuscarNome.Name = "txtBuscarNome";
-            this.txtBuscarNome.Size = new System.Drawing.Size(115, 20);
-            this.txtBuscarNome.TabIndex = 74;
-            this.txtBuscarNome.TextChanged += new System.EventHandler(this.TxtBuscarNome_TextChanged);
+            txtBuscarNome.Location = new System.Drawing.Point(465, 14);
+            txtBuscarNome.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtBuscarNome.Name = "txtBuscarNome";
+            txtBuscarNome.Size = new System.Drawing.Size(134, 23);
+            txtBuscarNome.TabIndex = 74;
+            txtBuscarNome.TextChanged += TxtBuscarNome_TextChanged;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(350, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 68;
-            this.label1.Text = "Buscar:";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(408, 17);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(45, 15);
+            label1.TabIndex = 68;
+            label1.Text = "Buscar:";
             // 
             // txtDescricao
             // 
-            this.txtDescricao.Enabled = false;
-            this.txtDescricao.Location = new System.Drawing.Point(289, 74);
-            this.txtDescricao.Name = "txtDescricao";
-            this.txtDescricao.Size = new System.Drawing.Size(225, 20);
-            this.txtDescricao.TabIndex = 88;
+            txtDescricao.Enabled = false;
+            txtDescricao.Location = new System.Drawing.Point(337, 85);
+            txtDescricao.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtDescricao.Name = "txtDescricao";
+            txtDescricao.Size = new System.Drawing.Size(262, 23);
+            txtDescricao.TabIndex = 88;
             // 
             // txtEstoque
             // 
-            this.txtEstoque.Enabled = false;
-            this.txtEstoque.Location = new System.Drawing.Point(77, 112);
-            this.txtEstoque.Name = "txtEstoque";
-            this.txtEstoque.Size = new System.Drawing.Size(115, 20);
-            this.txtEstoque.TabIndex = 89;
+            txtEstoque.Enabled = false;
+            txtEstoque.Location = new System.Drawing.Point(90, 129);
+            txtEstoque.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtEstoque.Name = "txtEstoque";
+            txtEstoque.Size = new System.Drawing.Size(134, 23);
+            txtEstoque.TabIndex = 89;
             // 
             // btnImg
             // 
-            this.btnImg.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnImg.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnImg.Enabled = false;
-            this.btnImg.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaption;
-            this.btnImg.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnImg.Location = new System.Drawing.Point(679, 111);
-            this.btnImg.Name = "btnImg";
-            this.btnImg.Size = new System.Drawing.Size(23, 23);
-            this.btnImg.TabIndex = 91;
-            this.btnImg.Text = "+";
-            this.btnImg.UseVisualStyleBackColor = false;
-            this.btnImg.Click += new System.EventHandler(this.BtnImg_Click);
+            btnImg.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            btnImg.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnImg.Enabled = false;
+            btnImg.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaption;
+            btnImg.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            btnImg.Location = new System.Drawing.Point(792, 128);
+            btnImg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnImg.Name = "btnImg";
+            btnImg.Size = new System.Drawing.Size(27, 27);
+            btnImg.TabIndex = 91;
+            btnImg.Text = "+";
+            btnImg.UseVisualStyleBackColor = false;
+            btnImg.Click += BtnImg_Click;
             // 
             // img
             // 
-            this.img.Location = new System.Drawing.Point(552, 15);
-            this.img.Name = "img";
-            this.img.Size = new System.Drawing.Size(120, 120);
-            this.img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.img.TabIndex = 90;
-            this.img.TabStop = false;
+            img.Location = new System.Drawing.Point(644, 17);
+            img.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            img.Name = "img";
+            img.Size = new System.Drawing.Size(140, 138);
+            img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            img.TabIndex = 90;
+            img.TabStop = false;
             // 
             // btnExcluir
             // 
-            this.btnExcluir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExcluir.Enabled = false;
-            this.btnExcluir.FlatAppearance.BorderSize = 0;
-            this.btnExcluir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExcluir.Image = ((System.Drawing.Image)(resources.GetObject("btnExcluir.Image")));
-            this.btnExcluir.Location = new System.Drawing.Point(457, 363);
-            this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.Size = new System.Drawing.Size(70, 65);
-            this.btnExcluir.TabIndex = 87;
-            this.btnExcluir.UseVisualStyleBackColor = true;
-            this.btnExcluir.Click += new System.EventHandler(this.BtnExcluir_Click);
+            btnExcluir.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnExcluir.Enabled = false;
+            btnExcluir.FlatAppearance.BorderSize = 0;
+            btnExcluir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(240, 240, 240);
+            btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnExcluir.Image = (System.Drawing.Image)resources.GetObject("btnExcluir.Image");
+            btnExcluir.Location = new System.Drawing.Point(533, 419);
+            btnExcluir.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnExcluir.Name = "btnExcluir";
+            btnExcluir.Size = new System.Drawing.Size(82, 75);
+            btnExcluir.TabIndex = 87;
+            btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += BtnExcluir_Click;
             // 
             // btnEditar
             // 
-            this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditar.Enabled = false;
-            this.btnEditar.FlatAppearance.BorderSize = 0;
-            this.btnEditar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
-            this.btnEditar.Location = new System.Drawing.Point(376, 363);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(70, 65);
-            this.btnEditar.TabIndex = 86;
-            this.btnEditar.UseVisualStyleBackColor = true;
-            this.btnEditar.Click += new System.EventHandler(this.BtnEditar_Click);
+            btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnEditar.Enabled = false;
+            btnEditar.FlatAppearance.BorderSize = 0;
+            btnEditar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(240, 240, 240);
+            btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnEditar.Image = (System.Drawing.Image)resources.GetObject("btnEditar.Image");
+            btnEditar.Location = new System.Drawing.Point(439, 419);
+            btnEditar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new System.Drawing.Size(82, 75);
+            btnEditar.TabIndex = 86;
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += BtnEditar_Click;
             // 
             // btnSalvar
             // 
-            this.btnSalvar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSalvar.Enabled = false;
-            this.btnSalvar.FlatAppearance.BorderSize = 0;
-            this.btnSalvar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnSalvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalvar.Image = ((System.Drawing.Image)(resources.GetObject("btnSalvar.Image")));
-            this.btnSalvar.Location = new System.Drawing.Point(294, 363);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(70, 65);
-            this.btnSalvar.TabIndex = 85;
-            this.btnSalvar.UseVisualStyleBackColor = true;
-            this.btnSalvar.Click += new System.EventHandler(this.BtnSalvar_Click);
+            btnSalvar.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnSalvar.Enabled = false;
+            btnSalvar.FlatAppearance.BorderSize = 0;
+            btnSalvar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(240, 240, 240);
+            btnSalvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSalvar.Image = (System.Drawing.Image)resources.GetObject("btnSalvar.Image");
+            btnSalvar.Location = new System.Drawing.Point(343, 419);
+            btnSalvar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new System.Drawing.Size(82, 75);
+            btnSalvar.TabIndex = 85;
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += BtnSalvar_Click;
             // 
             // btnNovo
             // 
-            this.btnNovo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNovo.FlatAppearance.BorderSize = 0;
-            this.btnNovo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnNovo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNovo.Image = ((System.Drawing.Image)(resources.GetObject("btnNovo.Image")));
-            this.btnNovo.Location = new System.Drawing.Point(213, 363);
-            this.btnNovo.Name = "btnNovo";
-            this.btnNovo.Size = new System.Drawing.Size(70, 65);
-            this.btnNovo.TabIndex = 84;
-            this.btnNovo.UseVisualStyleBackColor = true;
-            this.btnNovo.Click += new System.EventHandler(this.BtnNovo_Click);
+            btnNovo.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnNovo.FlatAppearance.BorderSize = 0;
+            btnNovo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(240, 240, 240);
+            btnNovo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnNovo.Image = (System.Drawing.Image)resources.GetObject("btnNovo.Image");
+            btnNovo.Location = new System.Drawing.Point(248, 419);
+            btnNovo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnNovo.Name = "btnNovo";
+            btnNovo.Size = new System.Drawing.Size(82, 75);
+            btnNovo.TabIndex = 84;
+            btnNovo.UseVisualStyleBackColor = true;
+            btnNovo.Click += BtnNovo_Click;
             // 
             // FrmProdutos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(728, 450);
-            this.Controls.Add(this.btnImg);
-            this.Controls.Add(this.img);
-            this.Controls.Add(this.txtEstoque);
-            this.Controls.Add(this.txtDescricao);
-            this.Controls.Add(this.btnExcluir);
-            this.Controls.Add(this.btnEditar);
-            this.Controls.Add(this.btnSalvar);
-            this.Controls.Add(this.btnNovo);
-            this.Controls.Add(this.grid);
-            this.Controls.Add(this.cbFornecedor);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtValor);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtNome);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtBuscarNome);
-            this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "FrmProdutos";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Tela de Produtos";
-            this.Load += new System.EventHandler(this.FrmProdutos_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.img)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.InactiveCaption;
+            ClientSize = new System.Drawing.Size(849, 519);
+            Controls.Add(btnImg);
+            Controls.Add(img);
+            Controls.Add(txtEstoque);
+            Controls.Add(txtDescricao);
+            Controls.Add(btnExcluir);
+            Controls.Add(btnEditar);
+            Controls.Add(btnSalvar);
+            Controls.Add(btnNovo);
+            Controls.Add(grid);
+            Controls.Add(cbFornecedor);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(txtValor);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(txtNome);
+            Controls.Add(label2);
+            Controls.Add(txtBuscarNome);
+            Controls.Add(label1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "FrmProdutos";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Tela de Produtos";
+            Load += FrmProdutos_Load;
+            ((System.ComponentModel.ISupportInitialize)grid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)img).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

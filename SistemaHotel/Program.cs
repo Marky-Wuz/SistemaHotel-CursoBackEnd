@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaHotel.Model.Classes.Contextos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,8 +27,12 @@ namespace SistemaHotel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new FrmMenu());
-            Application.Run(new FrmLogin());
+            Application.Run(new FrmMenu());
+
+            //ContextoEstoque contextoEstoque = new ContextoEstoque();
+            //contextoEstoque.Database.EnsureCreated();
+
+            //Application.Run(new FrmLogin());
         }
     }
 }

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SistemaHotel": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "hotelconexao": "Host=dpg-daoqgg6gekts73elpc9g-a.oregon-postgres.render.com;Port=5432;Database=dbdevback_vqe6;Username=dbdevback_vqe6_user;Password=vYiP2S1pQIC8YD0grcL0QcdPLFneNQ1y;SSL Mode=Require;TrustServerCertificate=true"
+      }
+    }
+  }
+}

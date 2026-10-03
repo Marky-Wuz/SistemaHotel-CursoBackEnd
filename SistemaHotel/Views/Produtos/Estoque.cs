@@ -1,4 +1,5 @@
 ﻿
+using SistemaHotel.Model.Classes.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +14,7 @@ namespace SistemaHotel.Produtos
 {
     public partial class FrmEstoque : Form
     {
-
-   
+          
        
         string id;
 
@@ -57,7 +57,7 @@ namespace SistemaHotel.Produtos
             txtProduto.Text = "";
             txtValor.Text = "";
             txtEstoque.Text = "";
-                       txtQuantidade.Text = "";
+            txtQuantidade.Text = "";
         }
 
 
@@ -70,7 +70,7 @@ namespace SistemaHotel.Produtos
 
         private void BtnProduto_Click(object sender, EventArgs e)
         {
-            habilitarCampos();
+            habilitarCampos();     
             limparCampos();
 
             Program.chamadaProdutos = "estoque";
