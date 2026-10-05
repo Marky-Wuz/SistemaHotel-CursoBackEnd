@@ -27,10 +27,10 @@ namespace SistemaHotel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmMenu());
 
             //ContextoEstoque contextoEstoque = new ContextoEstoque();
             //contextoEstoque.Database.EnsureCreated();
+            Application.Run(new FrmMenu());
 
             //Application.Run(new FrmLogin());
         }

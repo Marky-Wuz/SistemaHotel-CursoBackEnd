@@ -29,161 +29,187 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEstoque));
-            this.txtEstoque = new System.Windows.Forms.TextBox();
-            this.cbFornecedor = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtValor = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtProduto = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtQuantidade = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnProduto = new System.Windows.Forms.Button();
-            this.btnSalvar = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            txtEstoque = new System.Windows.Forms.TextBox();
+            cbFornecedor = new System.Windows.Forms.ComboBox();
+            label6 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            txtValor = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
+            txtProduto = new System.Windows.Forms.TextBox();
+            label1 = new System.Windows.Forms.Label();
+            txtQuantidade = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            btnProduto = new System.Windows.Forms.Button();
+            btnSalvar = new System.Windows.Forms.Button();
+            comboBox1 = new System.Windows.Forms.ComboBox();
+            SuspendLayout();
             // 
             // txtEstoque
             // 
-            this.txtEstoque.Enabled = false;
-            this.txtEstoque.Location = new System.Drawing.Point(90, 54);
-            this.txtEstoque.Name = "txtEstoque";
-            this.txtEstoque.Size = new System.Drawing.Size(59, 20);
-            this.txtEstoque.TabIndex = 95;
+            txtEstoque.Enabled = false;
+            txtEstoque.Location = new System.Drawing.Point(105, 62);
+            txtEstoque.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtEstoque.Name = "txtEstoque";
+            txtEstoque.Size = new System.Drawing.Size(68, 23);
+            txtEstoque.TabIndex = 95;
             // 
             // cbFornecedor
             // 
-            this.cbFornecedor.Enabled = false;
-            this.cbFornecedor.FormattingEnabled = true;
-            this.cbFornecedor.Location = new System.Drawing.Point(340, 17);
-            this.cbFornecedor.Name = "cbFornecedor";
-            this.cbFornecedor.Size = new System.Drawing.Size(110, 21);
-            this.cbFornecedor.TabIndex = 91;
+            cbFornecedor.Enabled = false;
+            cbFornecedor.FormattingEnabled = true;
+            cbFornecedor.Location = new System.Drawing.Point(397, 20);
+            cbFornecedor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cbFornecedor.Name = "cbFornecedor";
+            cbFornecedor.Size = new System.Drawing.Size(128, 23);
+            cbFornecedor.TabIndex = 91;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(270, 20);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 13);
-            this.label6.TabIndex = 94;
-            this.label6.Text = "Fornecedor:";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(315, 23);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(70, 15);
+            label6.TabIndex = 94;
+            label6.Text = "Fornecedor:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(35, 57);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 13);
-            this.label5.TabIndex = 93;
-            this.label5.Text = "Estoque:";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(41, 66);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(52, 15);
+            label5.TabIndex = 93;
+            label5.Text = "Estoque:";
             // 
             // txtValor
             // 
-            this.txtValor.Enabled = false;
-            this.txtValor.Location = new System.Drawing.Point(391, 54);
-            this.txtValor.Name = "txtValor";
-            this.txtValor.Size = new System.Drawing.Size(59, 20);
-            this.txtValor.TabIndex = 90;
+            txtValor.Enabled = false;
+            txtValor.Location = new System.Drawing.Point(456, 62);
+            txtValor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtValor.Name = "txtValor";
+            txtValor.Size = new System.Drawing.Size(68, 23);
+            txtValor.TabIndex = 90;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(351, 58);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 13);
-            this.label4.TabIndex = 92;
-            this.label4.Text = "Valor:";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(410, 67);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(36, 15);
+            label4.TabIndex = 92;
+            label4.Text = "Valor:";
             // 
             // txtProduto
             // 
-            this.txtProduto.Enabled = false;
-            this.txtProduto.Location = new System.Drawing.Point(90, 17);
-            this.txtProduto.Name = "txtProduto";
-            this.txtProduto.Size = new System.Drawing.Size(110, 20);
-            this.txtProduto.TabIndex = 97;
+            txtProduto.Enabled = false;
+            txtProduto.Location = new System.Drawing.Point(105, 103);
+            txtProduto.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtProduto.Name = "txtProduto";
+            txtProduto.Size = new System.Drawing.Size(128, 23);
+            txtProduto.TabIndex = 97;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 96;
-            this.label1.Text = "Produto:";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(41, 23);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(53, 15);
+            label1.TabIndex = 96;
+            label1.Text = "Produto:";
             // 
             // txtQuantidade
             // 
-            this.txtQuantidade.Enabled = false;
-            this.txtQuantidade.Location = new System.Drawing.Point(241, 54);
-            this.txtQuantidade.Name = "txtQuantidade";
-            this.txtQuantidade.Size = new System.Drawing.Size(85, 20);
-            this.txtQuantidade.TabIndex = 99;
+            txtQuantidade.Enabled = false;
+            txtQuantidade.Location = new System.Drawing.Point(281, 62);
+            txtQuantidade.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtQuantidade.Name = "txtQuantidade";
+            txtQuantidade.Size = new System.Drawing.Size(98, 23);
+            txtQuantidade.TabIndex = 99;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(170, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 13);
-            this.label2.TabIndex = 98;
-            this.label2.Text = "Quantidade:";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(198, 66);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(72, 15);
+            label2.TabIndex = 98;
+            label2.Text = "Quantidade:";
             // 
             // btnProduto
             // 
-            this.btnProduto.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnProduto.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProduto.Location = new System.Drawing.Point(206, 15);
-            this.btnProduto.Name = "btnProduto";
-            this.btnProduto.Size = new System.Drawing.Size(23, 23);
-            this.btnProduto.TabIndex = 100;
-            this.btnProduto.Text = "+";
-            this.btnProduto.UseVisualStyleBackColor = false;
-            this.btnProduto.Click += new System.EventHandler(this.BtnProduto_Click);
+            btnProduto.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            btnProduto.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            btnProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnProduto.Location = new System.Drawing.Point(240, 17);
+            btnProduto.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnProduto.Name = "btnProduto";
+            btnProduto.Size = new System.Drawing.Size(27, 27);
+            btnProduto.TabIndex = 100;
+            btnProduto.Text = "+";
+            btnProduto.UseVisualStyleBackColor = false;
+            btnProduto.Click += BtnProduto_Click;
             // 
             // btnSalvar
             // 
-            this.btnSalvar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSalvar.Enabled = false;
-            this.btnSalvar.FlatAppearance.BorderSize = 0;
-            this.btnSalvar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnSalvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalvar.Image = ((System.Drawing.Image)(resources.GetObject("btnSalvar.Image")));
-            this.btnSalvar.Location = new System.Drawing.Point(483, 15);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(70, 65);
-            this.btnSalvar.TabIndex = 101;
-            this.btnSalvar.UseVisualStyleBackColor = true;
-            this.btnSalvar.Click += new System.EventHandler(this.BtnSalvar_Click);
+            btnSalvar.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnSalvar.Enabled = false;
+            btnSalvar.FlatAppearance.BorderSize = 0;
+            btnSalvar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(240, 240, 240);
+            btnSalvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSalvar.Image = (System.Drawing.Image)resources.GetObject("btnSalvar.Image");
+            btnSalvar.Location = new System.Drawing.Point(564, 17);
+            btnSalvar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new System.Drawing.Size(82, 75);
+            btnSalvar.TabIndex = 101;
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += BtnSalvar_Click;
+            // 
+            // comboBox1
+            // 
+            comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new System.Drawing.Point(105, 20);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new System.Drawing.Size(121, 23);
+            comboBox1.TabIndex = 102;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // FrmEstoque
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(588, 109);
-            this.Controls.Add(this.btnSalvar);
-            this.Controls.Add(this.btnProduto);
-            this.Controls.Add(this.txtQuantidade);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtProduto);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtEstoque);
-            this.Controls.Add(this.cbFornecedor);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtValor);
-            this.Controls.Add(this.label4);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "FrmEstoque";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Estoque";
-            this.Activated += new System.EventHandler(this.FrmEstoque_Activated);
-            this.Load += new System.EventHandler(this.FrmEstoque_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.InactiveCaption;
+            ClientSize = new System.Drawing.Size(686, 126);
+            Controls.Add(comboBox1);
+            Controls.Add(btnSalvar);
+            Controls.Add(btnProduto);
+            Controls.Add(txtQuantidade);
+            Controls.Add(label2);
+            Controls.Add(txtProduto);
+            Controls.Add(label1);
+            Controls.Add(txtEstoque);
+            Controls.Add(cbFornecedor);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(txtValor);
+            Controls.Add(label4);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "FrmEstoque";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Estoque";
+            Activated += FrmEstoque_Activated;
+            Load += FrmEstoque_Load;
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -201,5 +227,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnProduto;
         private System.Windows.Forms.Button btnSalvar;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,12 +9,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaHotel.Model.Classes.Contextos;
+using SistemaHotel.Model.Classes.Entidades;
+using System.Drawing.Text;
 
 namespace SistemaHotel.Produtos
 {
     public partial class FrmProdutos : Form
     {
-
+        private bool cadastrandoProduto = false;
+        private Estoque produtoSelecionado;
 
         string id;
 
@@ -85,9 +90,6 @@ namespace SistemaHotel.Produtos
             cbFornecedor.Text = "";
             LimparFoto();
         }
-
-
-
         private void LimparFoto()
         {
             img.Image = Properties.Resources.sem_foto;
@@ -100,14 +102,27 @@ namespace SistemaHotel.Produtos
             Listar();
         }
 
+        //Cadastro de produtos
         private void BtnNovo_Click(object sender, EventArgs e)
         {
+            ContextoEstoque estoque = new ContextoEstoque();
+            string busca = txtBuscarNome.Text.Trim();
 
-
-            if (cbFornecedor.Text == "")
+            if (string.IsNullOrEmpty(busca))
             {
-                MessageBox.Show("Cadastre Antes um Fornecedor!");
-                Close();
+                MessageBox.Show("Digite um produto para buscar.");
+                return;
+            }
+
+            var produto = estoque.Estoques.FirstOrDefault(p => p.NomeProduto == busca);
+
+            if (produto != null)
+            {
+                PreencherProduto(produto);
+            }
+            else
+            {
+                PerguntarNovoProduto();
             }
 
             habilitarCampos();
@@ -117,34 +132,147 @@ namespace SistemaHotel.Produtos
             btnExcluir.Enabled = false;
 
         }
+        private void PreencherProduto(Estoque produto)
+        {
+            cadastrandoProduto = false;
+            produtoSelecionado = produto;
+
+            txtNome.Text = produto.NomeProduto;
+            txtDescricao.Text = produto.Descricao;
+            txtValor.Text = produto.Valor.ToString("N2");
+            cbFornecedor.Text = produto.Fornecedor;
+
+            txtEstoque.Enabled = true;
+        }
+
+        private void PerguntarNovoProduto()
+        {
+            /*var resultado = MessageBox.Show("Produto não encontrado. Deseja cadastrar um novo produto?", "Produto não encontrado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (resultado == DialogResult.Yes)
+            {
+                limparCampos();
+                habilitarCampos();
+                btnSalvar.Enabled = true;
+                btnNovo.Enabled = false;
+                btnEditar.Enabled = false;
+                btnExcluir.Enabled = false;
+            }*/
+            DialogResult resultado = MessageBox.Show("Produto não encontrado. Deseja cadastrar um novo produto?", "Produto não encontrado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                habilitarCampos();
+            }
+        }
 
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text.ToString().Trim() == "")
-            {
-                txtNome.Text = "";
-                MessageBox.Show("Preencha o Nome", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtNome.Focus();
-                return;
-            }
-
-            if (txtValor.Text == "")
-            {
-                MessageBox.Show("Preencha o Valor", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtValor.Focus();
-                return;
-            }
-
 
             //CÓDIGO DO BOTÃO PARA SALVAR
 
+            if (cadastrandoProduto)
+            {
+                CadastrarProduto();
+            }
+            else
+            {
+                AdicionarEstoque();
+            }
+
+
 
             MessageBox.Show("Registro Salvo com Sucesso!", "Dados Salvo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
             btnNovo.Enabled = true;
             btnSalvar.Enabled = false;
             limparCampos();
             desabilitarCampos();
             Listar();
+        }
+
+        private void CadastrarProduto()
+        {
+            string nomeProduto = txtNome.Text;
+            string descricaoProduto = txtDescricao.Text;
+
+            if (string.IsNullOrWhiteSpace(nomeProduto))
+            {
+                MessageBox.Show("Preencha o Nome", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNome.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(descricaoProduto))
+            {
+                MessageBox.Show("Preencha a Descrição", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDescricao.Focus();
+                return;
+            }
+
+            if (!int.TryParse(txtEstoque.Text, out int estoqueProduto))
+            {
+                MessageBox.Show("Preencha o Estoque corretamente", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtEstoque.Focus();
+                return;
+            }
+
+            if (cbFornecedor.SelectedValue == null && string.IsNullOrWhiteSpace(cbFornecedor.Text))
+            {
+                MessageBox.Show("Selecione um fornecedor.");
+                cbFornecedor.Focus();
+                return;
+            }
+
+            if (!decimal.TryParse(txtValor.Text, out decimal valorProdutoDecimal))
+            {
+                MessageBox.Show("Preencha o Valor corretamente", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtValor.Focus();
+                return;
+            }
+
+            long valorProdutoLong = (long)valorProdutoDecimal;
+
+            var novo = new Estoque(
+                0,
+                nomeProduto,
+                descricaoProduto,
+                estoqueProduto,
+                cbFornecedor.Text,
+                valorProdutoLong,
+                0
+            );
+
+            using (var salvar = new ContextoEstoque())
+            {
+                salvar.Estoques.Add(novo);
+                salvar.SaveChanges();
+            }
+        }
+
+        private void AdicionarEstoque()
+        {
+            if (!int.TryParse(txtEstoque.Text, out int quantidade))
+            {
+                MessageBox.Show("Informe uma quantidade válida.");
+                txtEstoque.Focus();
+                return;
+            }
+
+            //Não pode ser negativo nem zero
+            if (quantidade <= 0)
+            {
+                MessageBox.Show("Informe uma quantidade maior que zero.");
+                txtEstoque.Focus();
+                return;
+            }
+
+            produtoSelecionado.Estoque += quantidade;
+
+            // Salvar alteração
+            var adicionar = new ContextoEstoque();
+            adicionar.SaveChanges();
+            MessageBox.Show("Estoque atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnEditar_Click(object sender, EventArgs e)
@@ -223,7 +351,6 @@ namespace SistemaHotel.Produtos
         private void TxtBuscarNome_TextChanged(object sender, EventArgs e)
         {
             BuscarNome();
-            habilitarCampos();
         }
 
         private void Grid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -243,6 +370,11 @@ namespace SistemaHotel.Produtos
         }
 
         private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

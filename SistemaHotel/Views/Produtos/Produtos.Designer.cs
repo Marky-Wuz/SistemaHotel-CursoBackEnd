@@ -48,6 +48,7 @@
             btnEditar = new System.Windows.Forms.Button();
             btnSalvar = new System.Windows.Forms.Button();
             btnNovo = new System.Windows.Forms.Button();
+            comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)img).BeginInit();
             SuspendLayout();
@@ -272,12 +273,24 @@
             btnNovo.UseVisualStyleBackColor = true;
             btnNovo.Click += BtnNovo_Click;
             // 
+            // comboBox1
+            // 
+            comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new System.Drawing.Point(90, 44);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new System.Drawing.Size(134, 23);
+            comboBox1.TabIndex = 92;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
             // FrmProdutos
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.InactiveCaption;
             ClientSize = new System.Drawing.Size(849, 519);
+            Controls.Add(comboBox1);
             Controls.Add(btnImg);
             Controls.Add(img);
             Controls.Add(txtEstoque);
@@ -333,5 +346,6 @@
         private System.Windows.Forms.TextBox txtEstoque;
         private System.Windows.Forms.PictureBox img;
         private System.Windows.Forms.Button btnImg;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

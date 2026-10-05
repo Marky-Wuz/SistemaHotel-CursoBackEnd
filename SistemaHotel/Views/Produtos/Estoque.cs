@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+using SistemaHotel.Model.Classes.Contextos;
 using SistemaHotel.Model.Classes.Entidades;
 using System;
 using System.Collections.Generic;
@@ -14,8 +16,6 @@ namespace SistemaHotel.Produtos
 {
     public partial class FrmEstoque : Form
     {
-          
-       
         string id;
 
         public FrmEstoque()
@@ -65,12 +65,13 @@ namespace SistemaHotel.Produtos
         private void FrmEstoque_Load(object sender, EventArgs e)
         {
             desabilitarCampos();
-            CarregarCombobox();
+            //CarregarCombobox();
+            CarregarProdutos();
         }
 
         private void BtnProduto_Click(object sender, EventArgs e)
         {
-            habilitarCampos();     
+            habilitarCampos();
             limparCampos();
 
             Program.chamadaProdutos = "estoque";
@@ -105,9 +106,28 @@ namespace SistemaHotel.Produtos
 
 
             MessageBox.Show("Lançamento Feito com Sucesso!", "Dados Editados", MessageBoxButtons.OK, MessageBoxIcon.Information);
-           
+
             limparCampos();
             desabilitarCampos();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem is Estoque produto)
+            {
+                txtEstoque.Text = produto.Estoque.ToString();
+                txtValor.Text = produto.Valor.ToString();
+            }
+        }
+        private void CarregarProdutos()
+        {
+            ContextoEstoque produtos = new ContextoEstoque();
+
+            var lista = produtos.Estoques.OrderBy(p => p.NomeProduto).ToList();
+
+            comboBox1.DataSource = lista;
+            comboBox1.DisplayMember = "NomeProduto";
+            comboBox1.ValueMember = "Id";
         }
     }
 }
