@@ -70,6 +70,7 @@
             // 
             // cbFornecedor
             // 
+            cbFornecedor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             cbFornecedor.Enabled = false;
             cbFornecedor.FormattingEnabled = true;
             cbFornecedor.Location = new System.Drawing.Point(337, 129);
@@ -77,6 +78,7 @@
             cbFornecedor.Name = "cbFornecedor";
             cbFornecedor.Size = new System.Drawing.Size(118, 23);
             cbFornecedor.TabIndex = 73;
+            cbFornecedor.SelectedIndexChanged += cbFornecedor_SelectedIndexChanged;
             // 
             // label6
             // 

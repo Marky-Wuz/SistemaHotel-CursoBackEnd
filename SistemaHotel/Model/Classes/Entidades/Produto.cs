@@ -1,6 +1,6 @@
 ﻿namespace SistemaHotel.Model.Classes.Entidades
 {
-    internal class Produtos
+    internal class Produto
     {
         //Propriedades
         public int Id { get; set; }
@@ -8,12 +8,12 @@
         public string Descricao { get; set; }
         public int Estoque { get; set; }
         public string Fornecedor { get; set; }
-        public long Valor { get; set; }
+        public decimal Valor { get; set; }
 
         //Construtores
-        public Produtos(int id, string nomeProduto, string descricao, int estoque, string fornecedor, long valor)
+        public Produto(string nomeProduto, string descricao, int estoque, string fornecedor, decimal valor)
         {
-            Id = id;
+            
             NomeProduto = nomeProduto;
             Descricao = descricao;
             Estoque = estoque;

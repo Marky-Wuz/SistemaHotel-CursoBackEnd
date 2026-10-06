@@ -17,8 +17,8 @@ namespace SistemaHotel.Produtos
 {
     public partial class FrmProdutos : Form
     {
-        private bool cadastrandoProduto = false;
-        private Estoque produtoSelecionado;
+        private bool cadastrandoProduto = true;
+        private Estoque estoqueatualizar;
 
         string id;
 
@@ -135,14 +135,13 @@ namespace SistemaHotel.Produtos
         private void PreencherProduto(Estoque produto)
         {
             cadastrandoProduto = false;
-            produtoSelecionado = produto;
+            estoqueatualizar = produto;
 
             txtNome.Text = produto.NomeProduto;
             txtDescricao.Text = produto.Descricao;
-            txtValor.Text = produto.Valor.ToString("N2");
+            txtValor.Text = produto.Valor.ToString();
             cbFornecedor.Text = produto.Fornecedor;
-
-            txtEstoque.Enabled = true;
+            txtEstoque.Text = produto.Estoque.ToString();
         }
 
         private void PerguntarNovoProduto()
@@ -162,6 +161,9 @@ namespace SistemaHotel.Produtos
             if (resultado == DialogResult.Yes)
             {
                 habilitarCampos();
+                ContextoEstoque listafornecedor = new ContextoEstoque();
+                var listaf = listafornecedor.Estoques.FirstOrDefault(p => p.Fornecedor == cbFornecedor.Text);
+                cbFornecedor.DataSource = listaf;
             }
         }
 
@@ -176,7 +178,7 @@ namespace SistemaHotel.Produtos
             }
             else
             {
-                AdicionarEstoque();
+                //AdicionarEstoque(); ---NÃO USAR---
             }
 
 
@@ -231,49 +233,50 @@ namespace SistemaHotel.Produtos
                 return;
             }
 
-            long valorProdutoLong = (long)valorProdutoDecimal;
-
             var novo = new Estoque(
-                0,
+                
                 nomeProduto,
                 descricaoProduto,
                 estoqueProduto,
                 cbFornecedor.Text,
-                valorProdutoLong,
-                0
+                valorProdutoDecimal
+                
             );
 
-            using (var salvar = new ContextoEstoque())
-            {
-                salvar.Estoques.Add(novo);
-                salvar.SaveChanges();
-            }
-        }
+            var salvar = new ContextoEstoque();
+            salvar.Estoques.Add(novo);
+            salvar.SaveChanges();
+        }               
 
-        private void AdicionarEstoque()
-        {
-            if (!int.TryParse(txtEstoque.Text, out int quantidade))
-            {
-                MessageBox.Show("Informe uma quantidade válida.");
-                txtEstoque.Focus();
-                return;
-            }
+        /* private void AdicionarEstoque() ---------- NÃO USAR -------------
+         {
+             if (!int.TryParse(txtEstoque.Text, out int estoque))
+             {
+                 MessageBox.Show("Informe uma quantidade válida.");
+                 txtEstoque.Focus();
+                 return;
+             }
 
-            //Não pode ser negativo nem zero
-            if (quantidade <= 0)
-            {
-                MessageBox.Show("Informe uma quantidade maior que zero.");
-                txtEstoque.Focus();
-                return;
-            }
+             //Não pode ser negativo nem zero
+             if (estoque <= 0)
+             {
+                 MessageBox.Show("Informe uma quantidade maior que zero.");
+                 txtEstoque.Focus();
+                 return;
+             }
 
-            produtoSelecionado.Estoque += quantidade;
 
-            // Salvar alteração
-            var adicionar = new ContextoEstoque();
-            adicionar.SaveChanges();
-            MessageBox.Show("Estoque atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+             //quantidade.Estoque += int.Parse(txtEstoque.Text);
+
+
+             // Salvar alteração
+             var adicionar = new ContextoEstoque();
+
+             adicionar.Update(estoque += int.Parse(txtEstoque.Text));
+
+             adicionar.SaveChanges();
+             MessageBox.Show("Estoque atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+         }*/
 
         private void BtnEditar_Click(object sender, EventArgs e)
         {
@@ -377,6 +380,13 @@ namespace SistemaHotel.Produtos
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbFornecedor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ContextoEstoque listafornecedor = new ContextoEstoque();
+            var listaf = listafornecedor.Estoques.OrderBy(p => p.Fornecedor).ToList();
+            cbFornecedor.DataSource = listaf;
         }
     }
 }

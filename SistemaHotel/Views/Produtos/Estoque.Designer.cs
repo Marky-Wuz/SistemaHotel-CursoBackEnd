@@ -172,8 +172,8 @@
             // 
             // comboBox1
             // 
-            comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            comboBox1.ForeColor = System.Drawing.SystemColors.Window;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new System.Drawing.Point(105, 20);
             comboBox1.Name = "comboBox1";

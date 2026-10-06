@@ -24,13 +24,16 @@ namespace SistemaHotel.Model.Classes.Contextos
 
                 entidade.Property(e => e.NomeProduto);
 
+                entidade.Property(e => e.Descricao);
+
                 entidade.Property(e => e.Fornecedor);   
 
                 entidade.Property(e => e.Estoque);
 
-                entidade.Property(e => e.Quantidade);
+                entidade.Property(e => e.Valor)
+                    .HasColumnType("money");
 
-                entidade.Property(e => e.Valor);
+                entidade.Property(e => e.Quantidade);
             }
         );
         }

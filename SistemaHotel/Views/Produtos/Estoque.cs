@@ -117,6 +117,13 @@ namespace SistemaHotel.Produtos
             {
                 txtEstoque.Text = produto.Estoque.ToString();
                 txtValor.Text = produto.Valor.ToString();
+                cbFornecedor.Text = produto.Fornecedor.ToString();
+
+                txtQuantidade.Enabled = true;
+            }
+            else
+            {
+                comboBox1.SelectedIndex = -1;
             }
         }
         private void CarregarProdutos()
