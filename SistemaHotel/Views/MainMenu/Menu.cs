@@ -1,4 +1,5 @@
 ﻿using Microsoft.Reporting.WinForms;
+using SistemaHotel.Model.Classes.Contextos;
 using SistemaHotel.Relatorios;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace SistemaHotel
         {
             InitializeComponent();
         }
+
+ 
 
         private void FrmMenu_Resize(object sender, EventArgs e)
         {

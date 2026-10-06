@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using SistemaHotel.Cadastros;
+using SistemaHotel.Model.Classes.Contextos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,10 +28,42 @@ namespace SistemaHotel
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new FrmMenu());
-            Application.Run(new FrmLogin());
+
+            ContextoUsuario contextousu = new ContextoUsuario();
+            contextousu.Database.EnsureCreated();
+
+            if (TestarConexao())
+            {
+                MessageBox.Show("Conexão bem sucedida!");
+                Application.Run(new FrmFuncionarios());
+            }
+            else
+            {
+                MessageBox.Show("Falha ao conectar ao banco de dados");
+            }
+            //Application.Run(new FrmFuncionarios());
         }
+
+        private static bool TestarConexao()
+        {
+            try
+            {
+                using (var context = new ContextoUsuario())
+                {
+                    return context.Database.CanConnect();
+                }
+            
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao conectar ao banco de dados: " + ex.Message);
+                return false;
+            }
+        }
+
     }
+
 }

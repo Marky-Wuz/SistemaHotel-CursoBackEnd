@@ -1,4 +1,7 @@
 ﻿
+using Microsoft.IdentityModel.Tokens;
+using SistemaHotel.Model.Classes.Contextos;
+using SistemaHotel.Model.Classes.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +19,7 @@ namespace SistemaHotel.Cadastros
 
 
         string id;
+        ContextoUsuario contexto = new ContextoUsuario();
 
         string cpfAntigo;
 
@@ -24,21 +28,43 @@ namespace SistemaHotel.Cadastros
             InitializeComponent();
         }
 
-
         private void CarregarCombobox()
         {
 
         }
 
 
-        private void FormatarDG()
+        private void FormatarDG(string filtro = "")
         {
+            {
+                try
+                {
+                    var listadeprocura = contexto.usuarios.ToList();
+                    {
+                        switch (filtro)
+                        {
+                            case "nome":
+                                listadeprocura = contexto.usuarios.Where(u => u.NomeDoUsuario.Contains(txtBuscarNome.Text)).ToList();
+                                break;
+                            case "cpf":
+                                listadeprocura = contexto.usuarios.Where(u => u.Cpf.ToString().Contains(txtBuscarCPF.Text)).ToList();
+                                break;
+                            default:
+                                grid.DataSource = contexto.usuarios.ToList();
+                                break;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao carregar os dados: " + ex.Message);
+                }
 
+            }
         }
-
         private void Listar()
         {
-
+            grid.DataSource = contexto.usuarios.ToList();
 
 
             FormatarDG();
@@ -47,18 +73,33 @@ namespace SistemaHotel.Cadastros
 
         private void BuscarNome()
         {
+            if (rbNome.Checked)
+            {
+                ContextoUsuario contexto = new ContextoUsuario();
+                FormatarDG("nome");
+            }
+            else
+            {
+                MessageBox.Show("Selecione o Tipo de Busca!");
+            }
 
-
-            FormatarDG();
         }
 
 
         private void BuscarCPF()
         {
+            if (rbCPF.Checked)
+            {
+                ContextoUsuario contexto = new ContextoUsuario();
+                FormatarDG("cpf");
+            }
+            else
+            {
+                MessageBox.Show("Selecione o Tipo de Busca!");
+            }
 
-
-            FormatarDG();
         }
+
 
 
         private void habilitarCampos()
@@ -99,6 +140,12 @@ namespace SistemaHotel.Cadastros
             Listar();
             rbNome.Checked = true;
             CarregarCombobox();
+
+            if (!txtNome.Text.IsNullOrEmpty() && !txtCPF.Text.IsNullOrEmpty() && !txtEndereco.Text.IsNullOrEmpty() && !txtTelefone.Text.IsNullOrEmpty())
+            {
+                btnSalvar.Enabled = true;
+
+            }
         }
 
         private void RbNome_CheckedChanged(object sender, EventArgs e)
@@ -123,22 +170,40 @@ namespace SistemaHotel.Cadastros
         private void BtnNovo_Click(object sender, EventArgs e)
         {
 
-            if (cbCargo.Text == "")
+            if (btnNovo.Enabled)
             {
-                MessageBox.Show("Cadastre Antes um Cargo!");
-                Close();
+                habilitarCampos();
+                btnSalvar.Enabled = true;
+            }
+            else
+            {
+                desabilitarCampos();
             }
 
-            habilitarCampos();
+            if (!txtNome.Text.IsNullOrEmpty() && !txtCPF.Text.IsNullOrEmpty() && !txtEndereco.Text.IsNullOrEmpty() && !txtTelefone.Text.IsNullOrEmpty())
+            {
+                var resultado = MessageBox.Show("Tem Certeza que quer adicionar um novo Usuário?", "Confirmação", MessageBoxButtons.YesNo);
+                if (resultado == DialogResult.Yes)
+                {
+                    limparCampos();
+                    return;
+                }
+                else if (resultado == DialogResult.No)
+                {
+                    Close();
+                }
+                return;
+            }
             btnSalvar.Enabled = true;
-            btnNovo.Enabled = false;
-            btnEditar.Enabled = false;
+            btnEditar.Enabled = true;
             btnExcluir.Enabled = false;
+
         }
 
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text.ToString().Trim() == "")
+
+            if (txtNome.ToString().Trim() == "")
             {
                 txtNome.Text = "";
                 MessageBox.Show("Preencha o Nome", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -146,8 +211,9 @@ namespace SistemaHotel.Cadastros
                 return;
             }
 
-            if (txtCPF.Text == "   .   .   -")
+            if (txtCPF.Text.ToString().Trim() == "")
             {
+                txtCPF.Text = "";
                 MessageBox.Show("Preencha o CPF", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtCPF.Focus();
                 return;
@@ -155,122 +221,147 @@ namespace SistemaHotel.Cadastros
 
 
             //CÓDIGO DO BOTÃO PARA SALVAR
+            var nome = txtNome.Text;
+            var cpf = (txtCPF.Text.Replace(".", "").Replace("-", "").Replace(" ", ""));
+            var endereco = txtEndereco.Text;
+            var telefone = (txtTelefone.Text.Replace(".", "").Replace("-", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
+            var cargo = cbCargo.Text;
+
+            Usuario usuario = new Usuario(nome, long.Parse(cpf), long.Parse(telefone), endereco, cargo);
+
+            contexto.usuarios.Add(usuario);
 
 
 
             //VERIFICAR SE O CPF JÁ EXISTE NO BANCO
-            string cpf = txtCPF.Text;
+            string cpfA = txtCPF.Text;
 
 
-            if (cpf.Equals("123456"))
+            if (cpfA.Equals(contexto.usuarios.Select(u => u.Cpf).FirstOrDefault().ToString()))
             {
                 MessageBox.Show("CPF já Registrado!", "Dados Salvo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtCPF.Text = "";
-                txtCPF.Focus();
+                txtBuscarCPF.Text = "";
+                txtBuscarCPF.Focus();
                 return;
             }
 
 
 
             MessageBox.Show("Registro Salvo com Sucesso!", "Dados Salvo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnNovo.Enabled = true;
-            btnSalvar.Enabled = false;
+
             limparCampos();
             desabilitarCampos();
             Listar();
+            contexto.SaveChanges();
+            contexto.Update(usuario);
         }
 
         private void Grid_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void BtnEditar_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text.ToString().Trim() == "")
+            if (rbNome.Checked)
             {
-                txtNome.Text = "";
-                MessageBox.Show("Preencha o Nome", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtNome.Focus();
-                return;
-            }
-
-            if (txtCPF.Text == "   .   .   -")
-            {
-                MessageBox.Show("Preencha o CPF", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtCPF.Focus();
-                return;
-            }
-
-
-            //CÓDIGO DO BOTÃO PARA EDITAR
-
-
-            
-            
-            //VERIFICAR SE O CPF JÁ EXISTE NO BANCO
-            
-            if (txtCPF.Text != cpfAntigo)
-            {
-
-                if (false) // Substitua 'false' pela condição real para verificar se o CPF existe no banco de dados.
+                if (txtBuscarNome.Text.ToString().Trim() == "")
                 {
-                    MessageBox.Show("CPF já Registrado!", "Dados Salvo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtCPF.Text = "";
-                    txtCPF.Focus();
+                    txtBuscarNome.Text = "";
+                    MessageBox.Show("Preencha o Nome", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtNome.Focus();
                     return;
                 }
 
             }
+            if (rbCPF.Checked)
+            {
+                if (txtBuscarCPF.Text == "")
+                {
+                    txtBuscarCPF.Text = "";
+                    MessageBox.Show("Preencha o CPF", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCPF.Focus();
+                    return;
+                }
+            }
+
+            if (!txtBuscarNome.Text.IsNullOrEmpty())
+            {
+                Pesquisas(true, false, txtBuscarNome.Text, grid);
+            }
+            else if (!txtBuscarCPF.Text.IsNullOrEmpty())
+            {
+                string textoCPF = (txtBuscarCPF.Text.Replace(".", "").Replace("-", "").Replace(" ", ""));
+                //MessageBox.Show("CPF: " + textoCPF);
+                Pesquisas(false, true, textoCPF, grid);
+            }
 
 
 
 
-            MessageBox.Show("Registro Editado com Sucesso!", "Dados Editados", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnNovo.Enabled = true;
-            btnEditar.Enabled = false;
-            btnExcluir.Enabled = false;
-            limparCampos();
-            desabilitarCampos();
-            Listar();
+        }
+
+        public void Pesquisas(bool nome, bool cpf, string texto, DataGridView grid)
+        {
+            if (nome)
+            {
+                grid.DataSource = contexto.usuarios.Where(u => u.NomeDoUsuario.Contains(texto)).ToList();
+            }
+            else if (cpf)
+            {
+                //MessageBox.Show("CPF: " + texto);
+                grid.DataSource = contexto.usuarios.Where(u => u.Cpf.ToString().Contains(texto)).ToList();
+            }
+            else
+            {
+                grid.DataSource = contexto.usuarios.ToList();
+            }
         }
 
         private void BtnExcluir_Click(object sender, EventArgs e)
         {
-            var resultado = MessageBox.Show("Deseja Realmente Excluir o Registro?", "Excluir Registro", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (resultado == DialogResult.Yes)
+            var usuarioSelecionado = grid.CurrentRow.DataBoundItem as Usuario;
+            if (usuarioSelecionado != null)
             {
-                //CÓDIGO DO BOTÃO PARA EXCLUIR
+                var resultado = MessageBox.Show("Deseja Realmente Excluir o Registro?", "Excluir Registro", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    //CÓDIGO DO BOTÃO PARA EXCLUIR
+                    contexto.usuarios.Remove(usuarioSelecionado);
+
+                    //Excluir o registro selecionado no DataGridView
 
 
-                MessageBox.Show("Registro Excluido com Sucesso!", "Registro Excluido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btnNovo.Enabled = true;
-                btnEditar.Enabled = false;
-                btnExcluir.Enabled = false;
-                limparCampos();
-                desabilitarCampos();
 
-                Listar();
+                    MessageBox.Show("Registro Excluido com Sucesso!", "Registro Excluido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnNovo.Enabled = true;
+                    btnEditar.Enabled = false;
+                    btnExcluir.Enabled = false;
+                    limparCampos();
+                    desabilitarCampos();
+                    Listar();
+                }
+
             }
         }
 
         private void Grid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
 
             btnEditar.Enabled = true;
             btnExcluir.Enabled = true;
-            btnSalvar.Enabled = false;
+            btnSalvar.Enabled = true;
             habilitarCampos();
 
             id = grid.CurrentRow.Cells[0].Value.ToString();
-            txtNome.Text = grid.CurrentRow.Cells[1].Value.ToString();
-            txtCPF.Text = grid.CurrentRow.Cells[2].Value.ToString();
-            txtEndereco.Text = grid.CurrentRow.Cells[3].Value.ToString();
-            txtTelefone.Text = grid.CurrentRow.Cells[4].Value.ToString();
-            cbCargo.Text = grid.CurrentRow.Cells[5].Value.ToString();
-            
-            cpfAntigo = grid.CurrentRow.Cells[2].Value.ToString();
+            txtNome.Text = grid.CurrentRow.Cells["NomeDoUsuario"].Value.ToString();
+            txtCPF.Text = grid.CurrentRow.Cells["CPF"].Value.ToString();
+            txtEndereco.Text = grid.CurrentRow.Cells["Endereco"].Value.ToString();
+            txtTelefone.Text = grid.CurrentRow.Cells["Telefone"].Value.ToString();
+            cbCargo.Text = grid.CurrentRow.Cells["Regra"].Value.ToString();
+
+            cpfAntigo = grid.CurrentRow.Cells["CPF"].Value.ToString();
         }
 
         private void TxtBuscarNome_TextChanged(object sender, EventArgs e)
@@ -288,7 +379,79 @@ namespace SistemaHotel.Cadastros
             {
                 BuscarCPF();
             }
-                
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBuscarNome_KeyDown(object sender, KeyEventArgs e)
+        {
+            bool nomebutton = txtBuscarNome.Text.IsNullOrEmpty();
+            if (nomebutton != default(bool))
+            {
+                if (txtBuscarNome.Text.IsNullOrEmpty() && txtBuscarCPF.Text.IsNullOrEmpty())
+                {
+                    FormatarDG();
+                }
+                else if (rbNome.Checked)
+                {
+                    BuscarNome();
+                }
+
+            }
+
+            if (txtBuscarNome.Text.IsNullOrEmpty())
+            {
+                btnEditar.Enabled = false;
+            }
+            else
+            {
+                btnEditar.Enabled = true;
+            }
+        }
+
+        private void txtBuscarCPF_KeyDown(object sender, KeyEventArgs e)
+        {
+            bool cpfbutton = txtBuscarCPF.Text.IsNullOrEmpty();
+            if (cpfbutton != default(bool))
+            {
+
+                if (txtBuscarCPF.Text.IsNullOrEmpty())
+                {
+                    FormatarDG();
+                }
+                else if (rbCPF.Checked)
+                {
+                    BuscarCPF();
+                }
+            }
+
+            if (txtBuscarCPF.Text.IsNullOrEmpty())
+            {
+                btnEditar.Enabled = false;
+            }
+            else
+            {
+                btnEditar.Enabled = true;
+            }
+        }
+
+        private void txtNome_Click(object sender, EventArgs e)
+        {
+            if (txtNome.Text.FirstOrDefault() == ' ')
+            {
+                btnSalvar.Enabled = true;
+                btnNovo.Enabled = false;
+                txtNome.Text = txtNome.Text.Substring(1);
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
